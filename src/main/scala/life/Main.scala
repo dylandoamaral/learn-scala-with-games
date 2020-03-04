@@ -15,10 +15,11 @@ object Main extends App {
     )
 
     Thread.sleep(1000)
+
     printGameState(Life.next(state))
   }
 
-  val state = GameState(
+  val blinker = GameState(
     Array(
       Array(Dead, Dead, Dead),
       Array(Alive, Alive, Alive),
@@ -26,6 +27,15 @@ object Main extends App {
     ), (3, 3)
   )
 
+  val block = GameState(
+    Array(
+      Array(Dead, Dead, Dead, Dead),
+      Array(Dead, Alive, Alive, Dead),
+      Array(Dead, Alive, Alive, Dead),
+      Array(Dead, Dead, Dead, Dead)
+    ), (4, 4)
+  )
 
-  printGameState(state)
+
+  printGameState(block)
 }
