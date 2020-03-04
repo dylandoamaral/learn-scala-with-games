@@ -37,6 +37,15 @@ object Main extends App {
     ), (4, 4)
   )
 
+  val glider = GameState(
+    Array(
+      Array(0, 0, 0, 1, 0),
+      Array(0, 0, 1, 0, 0),
+      Array(0, 0, 1, 1, 1),
+      Array(0, 0, 0, 0, 0),
+      Array(0, 0, 0, 0, 0)
+    ), (5, 5)
+  )
 
-  printGameState(blinker)
+  printGameState(glider)
 }
