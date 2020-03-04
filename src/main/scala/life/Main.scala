@@ -4,6 +4,7 @@ import life.Life.GameState
 
 object Main extends App {
   def printGameState(state: GameState): Unit = {
+    println("\u001b[2J")
     state.board.foreach(
       line => {
         line.foreach {
@@ -37,5 +38,5 @@ object Main extends App {
   )
 
 
-  printGameState(block)
+  printGameState(blinker)
 }
