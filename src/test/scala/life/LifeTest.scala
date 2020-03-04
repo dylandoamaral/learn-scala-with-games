@@ -1,6 +1,6 @@
 package life
 
-import life.Life.{Alive, Dead, GameState}
+import life.Life.GameState
 import org.scalatest.flatspec.AnyFlatSpec
 
 class LifeTest extends AnyFlatSpec {
@@ -10,15 +10,15 @@ class LifeTest extends AnyFlatSpec {
       Life
         .init(size._1, size._2)
         .board
-        .forall(_ sameElements Array.fill(size._2)(Dead)))
+        .forall(_ sameElements Array.fill(size._2)(0)))
   }
 
-  "Cells" should "detect cells alive around" in {
+  "Cells" should "detect cells 1 around" in {
     val state = GameState(
       Array(
-        Array(Dead, Dead, Dead),
-        Array(Dead, Dead, Alive),
-        Array(Alive, Alive, Alive)
+        Array(0, 0, 0),
+        Array(0, 0, 1),
+        Array(1, 1, 1)
       ), (3, 3)
     )
 
@@ -36,17 +36,17 @@ class LifeTest extends AnyFlatSpec {
   "Next state" should "be coherent with previous one (1)" in {
     val from = GameState(
       Array(
-        Array(Dead, Dead, Dead),
-        Array(Alive, Dead, Dead),
-        Array(Alive, Alive, Dead)
+        Array(0, 0, 0),
+        Array(1, 0, 0),
+        Array(1, 1, 0)
       ), (3, 3)
     )
 
     val to = GameState(
       Array(
-        Array(Dead, Dead, Dead),
-        Array(Alive, Alive, Dead),
-        Array(Alive, Alive, Dead)
+        Array(0, 0, 0),
+        Array(1, 1, 0),
+        Array(1, 1, 0)
       ), (3, 3)
     )
 
@@ -56,17 +56,17 @@ class LifeTest extends AnyFlatSpec {
   "Next state" should "be coherent with previous one (2)" in {
     val from = GameState(
       Array(
-        Array(Dead, Dead, Dead),
-        Array(Alive, Alive, Alive),
-        Array(Dead, Dead, Dead)
+        Array(0, 0, 0),
+        Array(1, 1, 1),
+        Array(0, 0, 0)
       ), (3, 3)
     )
 
     val to = GameState(
       Array(
-        Array(Dead, Alive, Dead),
-        Array(Dead, Alive, Dead),
-        Array(Dead, Alive, Dead)
+        Array(0, 1, 0),
+        Array(0, 1, 0),
+        Array(0, 1, 0)
       ), (3, 3)
     )
 

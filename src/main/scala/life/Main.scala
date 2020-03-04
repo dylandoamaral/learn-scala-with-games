@@ -1,13 +1,13 @@
 package life
 
-import life.Life.{Alive, Dead, GameState}
+import life.Life.GameState
 
 object Main extends App {
   def printGameState(state: GameState): Unit = {
     state.board.foreach(
       line => {
         line.foreach {
-          case Dead => print("0")
+          case 0 => print("0")
           case _    => print("1")
         }
         println()
@@ -21,18 +21,18 @@ object Main extends App {
 
   val blinker = GameState(
     Array(
-      Array(Dead, Dead, Dead),
-      Array(Alive, Alive, Alive),
-      Array(Dead, Dead, Dead)
+      Array(0, 0, 0),
+      Array(1, 1, 1),
+      Array(0, 0, 0)
     ), (3, 3)
   )
 
   val block = GameState(
     Array(
-      Array(Dead, Dead, Dead, Dead),
-      Array(Dead, Alive, Alive, Dead),
-      Array(Dead, Alive, Alive, Dead),
-      Array(Dead, Dead, Dead, Dead)
+      Array(0, 0, 0, 0),
+      Array(0, 1, 1, 0),
+      Array(0, 1, 1, 0),
+      Array(0, 0, 0, 0)
     ), (4, 4)
   )
 
