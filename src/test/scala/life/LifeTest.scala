@@ -4,15 +4,6 @@ import life.Life.GameState
 import org.scalatest.flatspec.AnyFlatSpec
 
 class LifeTest extends AnyFlatSpec {
-  "Life" should "initialize the board correctly" in {
-    val size = (10, 30)
-    assert(
-      Life
-        .init(size._1, size._2)
-        .board
-        .forall(_ sameElements Array.fill(size._2)(0)))
-  }
-
   "Cells" should "detect cells 1 around" in {
     val state = GameState(
       Array(

@@ -3,10 +3,6 @@ package life
 object Life {
   case class GameState(board: Array[Array[Int]], size: (Int, Int));
 
-  def init(width: Int, height: Int): GameState = {
-    GameState(Array.fill(width, height)(0), (width, height))
-  }
-
   def next(state: GameState): GameState =
     state.copy(board = state.board.zipWithIndex.map {
       case (xel, x) =>
