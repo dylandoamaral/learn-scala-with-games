@@ -8,33 +8,27 @@ object Life {
   }
 
   def next(state: GameState): GameState =
-    GameState(
-      state.board.zipWithIndex.map {
-        case (xel, x) =>
-          xel.zipWithIndex.map {
-            case (_, y) => {
-              getAliveAround(state, (x, y)) match {
-                case n if n == 3 => 1
-                case n if n == 2 => state.board(x)(y)
-                case _           => 0
-              }
+    state.copy(board = state.board.zipWithIndex.map {
+      case (xel, x) =>
+        xel.zipWithIndex.map {
+          case (_, y) => {
+            countAliveAround(state, (x, y)) match {
+              case n if n == 3 => 1
+              case n if n == 2 => state.board(x)(y)
+              case _           => 0
             }
           }
-      },
-      state.size
-    )
+        }
+    })
 
-  // TODO refractor this horrible function
-  def getAliveAround(state: GameState, pos: (Int, Int)): Int = {
-    (getCellType(state, (pos._1 - 1, pos._2 - 1)) ::
-      getCellType(state, (pos._1, pos._2 - 1)) ::
-      getCellType(state, (pos._1 - 1, pos._2)) ::
-      getCellType(state, (pos._1 + 1, pos._2 + 1)) ::
-      getCellType(state, (pos._1, pos._2 + 1)) ::
-      getCellType(state, (pos._1 + 1, pos._2)) ::
-      getCellType(state, (pos._1 + 1, pos._2 - 1)) ::
-      getCellType(state, (pos._1 - 1, pos._2 + 1)) :: Nil).count(_ == 1)
-  }
+  def getPosAround(state: GameState, pos: (Int, Int)): Seq[(Int, Int)] =
+    for {
+      x <- pos._1 - 1 to pos._1 + 1
+      y <- pos._2 - 1 to pos._2 + 1 if (x != pos._1 || y != pos._2)
+    } yield (x, y)
+
+
+  def countAliveAround(state: GameState, pos: (Int, Int)): Int = getPosAround(state, pos).map(getCellType(state, _)).count(_ == 1)
 
   def getCellType(state: GameState, pos: (Int, Int)): Int = pos match {
     case p
