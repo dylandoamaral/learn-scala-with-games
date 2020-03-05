@@ -7,7 +7,6 @@ object Life {
     GameState(Array.fill(width, height)(0), (width, height))
   }
 
-  // TODO refractor this horrible function
   def next(state: GameState): GameState =
     GameState(
       state.board.zipWithIndex.map {
