@@ -11,6 +11,6 @@ scalaVersion := "2.13.1"
 val life  = "life.Main"
 val snake = "snake.Main"
 
-val current = life
+val current = snake
 
 mainClass in (Compile, run) := Some(current)
