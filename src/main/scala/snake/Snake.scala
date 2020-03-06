@@ -4,18 +4,28 @@ object Snake {
 
   trait Direction{
     def offset: Vector2Int
+    def opposite: Direction
   }
+
   case object Right extends Direction {
     override def offset: Vector2Int = Vector2Int(0, 1)
+
+    override def opposite: Direction = Left
   }
   case object Left extends Direction {
     override def offset: Vector2Int = Vector2Int(0, -1)
+
+    override def opposite: Direction = Right
   }
   case object Top extends Direction {
     override def offset: Vector2Int = Vector2Int(-1, 0)
+
+    override def opposite: Direction = Bottom
   }
   case object Bottom extends Direction {
     override def offset: Vector2Int = Vector2Int(1, 0)
+
+    override def opposite: Direction = Top
   }
 
   case class Vector2Int(x: Int, y: Int) {
@@ -37,7 +47,8 @@ object Snake {
   }
 
   def changeDirection(state: GameState, direction: Direction): GameState = {
-    state.copy(direction = direction)
+    if (direction == state.direction.opposite) state
+    else state.copy(direction = direction)
   }
 
   def updateSnakePosition(snake: List[Vector2Int], direction: Direction, head: Boolean = true): List[Vector2Int] = {

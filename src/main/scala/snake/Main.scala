@@ -43,10 +43,10 @@ object Main extends App {
     terminal.getKeyInput match {
       case Some(k) if keyMapping contains k =>
         keyMapping(k) match {
-          case v if v == "left"    => printGameState(Snake.next(state.copy(direction = Snake.Left)))
-          case v if v == "right"   => printGameState(Snake.next(state.copy(direction = Snake.Right)))
-          case v if v == "top"     => printGameState(Snake.next(state.copy(direction = Snake.Top)))
-          case v if v == "bottom"  => printGameState(Snake.next(state.copy(direction = Snake.Bottom)))
+          case v if v == "left"    => printGameState(Snake.changeDirection(state, Snake.Left))
+          case v if v == "right"   => printGameState(Snake.changeDirection(state, Snake.Right))
+          case v if v == "top"     => printGameState(Snake.changeDirection(state, Snake.Top))
+          case v if v == "bottom"  => printGameState(Snake.changeDirection(state, Snake.Bottom))
           case v if v == "restart" => printGameState(init)
           case _                   => printGameState(Snake.next(state))
         }
