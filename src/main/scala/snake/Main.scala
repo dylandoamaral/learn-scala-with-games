@@ -6,14 +6,6 @@ import utils.Terminal
 object Main extends App {
   val terminal: Terminal = new Terminal;
 
-  val init: GameState = GameState(
-    snake = List(Snake.Vector2Int(2, 2), Snake.Vector2Int(2, 3)),
-    food = Snake.Vector2Int(4, 4),
-    boardSize = Snake.Vector2Int(10, 20),
-    score = 0,
-    direction = Snake.Left
-  )
-
   val keyMapping: Map[Int, String] =
     Map(113 -> "left", 100 -> "right", 122 -> "top", 115 -> "bottom", 114 -> "restart")
 
@@ -47,7 +39,7 @@ object Main extends App {
           case v if v == "right"   => printGameState(Snake.changeDirection(state, Snake.Right))
           case v if v == "top"     => printGameState(Snake.changeDirection(state, Snake.Top))
           case v if v == "bottom"  => printGameState(Snake.changeDirection(state, Snake.Bottom))
-          case v if v == "restart" => printGameState(init)
+          case v if v == "restart" => printGameState(Snake.init)
           case _                   => printGameState(Snake.next(state))
         }
 
@@ -55,5 +47,5 @@ object Main extends App {
     }
   }
 
-  printGameState(init)
+  printGameState(Snake.init)
 }
