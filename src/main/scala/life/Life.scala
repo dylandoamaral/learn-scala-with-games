@@ -1,5 +1,7 @@
 package life
 
+import utils.Utils
+
 object Life {
   case class GameState(board: Array[Array[Int]], size: (Int, Int));
 
@@ -9,18 +11,13 @@ object Life {
     * @return The next game state
     */
   def next(state: GameState): GameState =
-    state.copy(board = state.board.zipWithIndex.map {
-      case (xel, x) =>
-        xel.zipWithIndex.map {
-          case (_, y) => {
-            countAliveAround(state, (x, y)) match {
-              case n if n == 3 => 1
-              case n if n == 2 => state.board(x)(y)
-              case _           => 0
-            }
-          }
-        }
-    })
+    state.copy(board = Utils.map2dArray(state.board, (x, y) => {
+      countAliveAround(state, (x, y)) match {
+        case n if n == 3 => 1
+        case n if n == 2 => state.board(x)(y)
+        case _           => 0
+      }
+    }))
 
   /**
     * Get position around the pos cell
