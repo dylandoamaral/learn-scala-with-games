@@ -2,7 +2,6 @@ package utils
 
 import java.io.IOException
 
-import life.Main.structureMapping
 import org.jline.terminal.TerminalBuilder
 
 class Terminal {
@@ -10,10 +9,7 @@ class Terminal {
 
   def getKeyInput: Option[Int] = {
     try{
-      reader.read(1) match {
-        case v if structureMapping.exists(_._1 == v) => Some(v)
-        case _ => None
-      }
+      Some(reader.read(1))
     }catch{
       case _: IOException => None
     }

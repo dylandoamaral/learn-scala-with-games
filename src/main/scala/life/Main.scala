@@ -60,8 +60,9 @@ object Main extends App {
     Thread.sleep(1000)
 
     terminal.getKeyInput match {
-      case Some(k) => printGameState(structureMapping(k))
-      case None    => printGameState(Life.next(state))
+      case Some(k) if structureMapping contains k =>
+        printGameState(structureMapping(k))
+      case _ => printGameState(Life.next(state))
     }
   }
 
